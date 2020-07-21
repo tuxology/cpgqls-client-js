@@ -1,5 +1,5 @@
 function __anonymous() {
-  let client = new CpgqlsClientLib.CpgqlsClient('b2974bb3b824.ngrok.io');
+  let client = new CpgqlsClientLib.CpgqlsClient('localhost:8080');
   const results = [];
   window.queryServer = () => {
     const textArea = document.querySelector('#query-box');
