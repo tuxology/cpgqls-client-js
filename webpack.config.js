@@ -6,19 +6,19 @@ module.exports = {
     filename: 'index.js',
     path: path.resolve(__dirname, 'dist'),
     ecmaVersion: 6,
-    libraryTarget: 'global'
-    // library: 'CpgqlsClient',
+    libraryTarget: 'global',
+    library: 'CpgqlsClientLib',
   },
   mode: 'production',
   module: {
     rules: [
       {
         test: /\.ts$/,
-        use: ['babel-loader', 'ts-loader']
-      }
-    ]
+        use: ['ts-loader'],
+      },
+    ],
   },
   resolve: {
-    extensions: [ '.ts'],
-  }
+    extensions: ['.ts'],
+  },
 };

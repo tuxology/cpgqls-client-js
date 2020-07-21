@@ -34,12 +34,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "npm:7.10.5"
       ],
       [
+        "@babel/plugin-transform-runtime",
+        "virtual:0442d3b060acb936e619edaf99409d3c62e40c7d5dfa8f684bcf6ae563095c3852142f463afcf1982162b37671591e2ded51564ff6de91edff4537912d78ff69#npm:7.10.5"
+      ],
+      [
         "@babel/preset-env",
         "virtual:0442d3b060acb936e619edaf99409d3c62e40c7d5dfa8f684bcf6ae563095c3852142f463afcf1982162b37671591e2ded51564ff6de91edff4537912d78ff69#npm:7.10.4"
       ],
       [
-        "@types/node",
-        "npm:14.0.23"
+        "@babel/runtime",
+        "npm:7.10.5"
       ],
       [
         "@webpack-cli/package-utils",
@@ -48,6 +52,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       [
         "babel-loader",
         "virtual:0442d3b060acb936e619edaf99409d3c62e40c7d5dfa8f684bcf6ae563095c3852142f463afcf1982162b37671591e2ded51564ff6de91edff4537912d78ff69#npm:8.1.0"
+      ],
+      [
+        "core-js",
+        "npm:3.6.5"
       ],
       [
         "prettier",
@@ -78,10 +86,12 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",
           "packageDependencies": [
             ["@babel/core", "npm:7.10.5"],
+            ["@babel/plugin-transform-runtime", "virtual:0442d3b060acb936e619edaf99409d3c62e40c7d5dfa8f684bcf6ae563095c3852142f463afcf1982162b37671591e2ded51564ff6de91edff4537912d78ff69#npm:7.10.5"],
             ["@babel/preset-env", "virtual:0442d3b060acb936e619edaf99409d3c62e40c7d5dfa8f684bcf6ae563095c3852142f463afcf1982162b37671591e2ded51564ff6de91edff4537912d78ff69#npm:7.10.4"],
-            ["@types/node", "npm:14.0.23"],
+            ["@babel/runtime", "npm:7.10.5"],
             ["@webpack-cli/package-utils", "npm:1.0.1-alpha.4"],
             ["babel-loader", "virtual:0442d3b060acb936e619edaf99409d3c62e40c7d5dfa8f684bcf6ae563095c3852142f463afcf1982162b37671591e2ded51564ff6de91edff4537912d78ff69#npm:8.1.0"],
+            ["core-js", "npm:3.6.5"],
             ["prettier", "npm:2.0.5"],
             ["ts-loader", "virtual:0442d3b060acb936e619edaf99409d3c62e40c7d5dfa8f684bcf6ae563095c3852142f463afcf1982162b37671591e2ded51564ff6de91edff4537912d78ff69#npm:8.0.1"],
             ["typescript", "patch:typescript@npm%3A3.9.7#builtin<compat/typescript>::version=3.9.7&hash=5b02a2"],
@@ -1127,6 +1137,23 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["@babel/plugin-transform-runtime", [
+        ["virtual:0442d3b060acb936e619edaf99409d3c62e40c7d5dfa8f684bcf6ae563095c3852142f463afcf1982162b37671591e2ded51564ff6de91edff4537912d78ff69#npm:7.10.5", {
+          "packageLocation": "./.yarn/$$virtual/@babel-plugin-transform-runtime-virtual-0d454d63bd/0/cache/@babel-plugin-transform-runtime-npm-7.10.5-c6bd05983f-e77530cf2c.zip/node_modules/@babel/plugin-transform-runtime/",
+          "packageDependencies": [
+            ["@babel/plugin-transform-runtime", "virtual:0442d3b060acb936e619edaf99409d3c62e40c7d5dfa8f684bcf6ae563095c3852142f463afcf1982162b37671591e2ded51564ff6de91edff4537912d78ff69#npm:7.10.5"],
+            ["@babel/core", "npm:7.10.5"],
+            ["@babel/helper-module-imports", "npm:7.10.4"],
+            ["@babel/helper-plugin-utils", "npm:7.10.4"],
+            ["resolve", "patch:resolve@npm%3A1.17.0#builtin<compat/resolve>::version=1.17.0&hash=3388aa"],
+            ["semver", "npm:5.7.1"]
+          ],
+          "packagePeers": [
+            "@babel/core"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["@babel/plugin-transform-shorthand-properties", [
         ["virtual:74c401a18f84d9533a55e01b4ec49c23034d98ed091ace094c3529d25876711df9e2d6770e75baf295cd2e9582ef9194081855afae797a374f2ab0734af2ec55#npm:7.10.4", {
           "packageLocation": "./.yarn/$$virtual/@babel-plugin-transform-shorthand-properties-virtual-a10a43ade0/0/cache/@babel-plugin-transform-shorthand-properties-npm-7.10.4-2e051c68b9-91ba5aa099.zip/node_modules/@babel/plugin-transform-shorthand-properties/",
@@ -1391,10 +1418,12 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["@tuxology/cpgqls-client", "workspace:."],
             ["@babel/core", "npm:7.10.5"],
+            ["@babel/plugin-transform-runtime", "virtual:0442d3b060acb936e619edaf99409d3c62e40c7d5dfa8f684bcf6ae563095c3852142f463afcf1982162b37671591e2ded51564ff6de91edff4537912d78ff69#npm:7.10.5"],
             ["@babel/preset-env", "virtual:0442d3b060acb936e619edaf99409d3c62e40c7d5dfa8f684bcf6ae563095c3852142f463afcf1982162b37671591e2ded51564ff6de91edff4537912d78ff69#npm:7.10.4"],
-            ["@types/node", "npm:14.0.23"],
+            ["@babel/runtime", "npm:7.10.5"],
             ["@webpack-cli/package-utils", "npm:1.0.1-alpha.4"],
             ["babel-loader", "virtual:0442d3b060acb936e619edaf99409d3c62e40c7d5dfa8f684bcf6ae563095c3852142f463afcf1982162b37671591e2ded51564ff6de91edff4537912d78ff69#npm:8.1.0"],
+            ["core-js", "npm:3.6.5"],
             ["prettier", "npm:2.0.5"],
             ["ts-loader", "virtual:0442d3b060acb936e619edaf99409d3c62e40c7d5dfa8f684bcf6ae563095c3852142f463afcf1982162b37671591e2ded51564ff6de91edff4537912d78ff69#npm:8.0.1"],
             ["typescript", "patch:typescript@npm%3A3.9.7#builtin<compat/typescript>::version=3.9.7&hash=5b02a2"],
@@ -1427,15 +1456,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-json-schema-npm-7.0.5-6c7647c88d-6290f9fe93.zip/node_modules/@types/json-schema/",
           "packageDependencies": [
             ["@types/json-schema", "npm:7.0.5"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["@types/node", [
-        ["npm:14.0.23", {
-          "packageLocation": "./.yarn/cache/@types-node-npm-14.0.23-856ce59d7c-35415a294f.zip/node_modules/@types/node/",
-          "packageDependencies": [
-            ["@types/node", "npm:14.0.23"]
           ],
           "linkType": "HARD",
         }]
@@ -2182,6 +2202,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/copy-descriptor-npm-0.1.1-864db4ab66-c052cf571f.zip/node_modules/copy-descriptor/",
           "packageDependencies": [
             ["copy-descriptor", "npm:0.1.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["core-js", [
+        ["npm:3.6.5", {
+          "packageLocation": "./.yarn/unplugged/core-js-npm-3.6.5-5941340066/node_modules/core-js/",
+          "packageDependencies": [
+            ["core-js", "npm:3.6.5"]
           ],
           "linkType": "HARD",
         }]

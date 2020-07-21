@@ -2,5 +2,43 @@
     <head> 
         <script type = "text/javascript" src = "../dist/index.js"></script>
         <script type = "text/javascript" src = "test.js"></script>
-    </head> 
+        <style type="text/css">
+            body {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+            }
+            #query {
+                display: flex;
+                flex-direction: column;
+            }
+            .width-50 {
+                flex: 0.5;
+            }
+            #results {
+                display: flex;
+                flex-direction: column;
+            }
+            #results .query {
+                padding: 5px;
+                background-color: gray;
+            }
+
+            #results .result {
+                padding: 4px;
+                background-color: black;
+                color: white;
+                padding: 5px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="query">
+            <input type="text" placeholder="server url" id="server"></input>
+            <textarea rows="2" placeholder="Query" id="query-box"></textarea>
+            <button onclick="queryServer()">Run Query</button>
+        </div>
+        <div id="results"></div>
+    </body>
 </html>

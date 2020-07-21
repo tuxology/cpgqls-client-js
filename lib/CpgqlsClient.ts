@@ -1,42 +1,98 @@
+import JoernQuery from './JoernQuery';
+
 export default class CpgqlsClient {
-  endpoint: string;
-  constructor(server_endpoint: string) { 
+  private endpoint: string;
+  webSocket: WebSocket | null = null;
+  queries: Map<string, JoernQuery> = new Map<string, JoernQuery>();
+
+  constructor(server_endpoint: string) {
     this.endpoint = server_endpoint;
   }
 
-  execute(query: string) {
-    console.log("Connecting.. " + this.endpoint)
-    var ws = connect(this.endpoint)
-    const req = new XMLHttpRequest()
-    var query_post_result:string
+  getHttpEndpoint() {
+    return `http://${this.endpoint}`;
+  }
 
-    ws.onopen = () => {
-      var query_str = {
-        "query": query
-      }
-      req.open("POST", this.endpoint + '/query')
-      req.responseType = 'json';
-      req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-      req.send(JSON.stringify(query_str))
-      req.onload  = () => {
-        query_post_result = req.response;
-        console.log(req.response)
-     };
-    }
+  getWSEndpoint() {
+    return `ws://${this.endpoint}`;
+  }
 
-    ws.onmessage = (event) => {
-      if (event.data == "connected") {
-        console.log("Connected to Joern Server..")
+  checkWebSocket(): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      if (this.webSocket === null) {
+        this.webSocket = new WebSocket(`${this.getWSEndpoint()}/connect`);
+        this.webSocket.addEventListener('message', evt => {
+          if (evt.data === 'connected') {
+            resolve(null);
+          } else {
+            this.onMessage(evt);
+          }
+        });
+        this.webSocket.addEventListener('error', (evt: Event) => {
+          console.error(evt);
+          reject(evt);
+        });
+      } else if (this.webSocket.readyState === this.webSocket.OPEN) {
+        resolve(null);
+      } else if (
+        this.webSocket.readyState === this.webSocket.CLOSED ||
+        this.webSocket.readyState === this.webSocket.CLOSING
+      ) {
+        reject('Connection Closed');
       }
-      else {
-        req.open("GET", this.endpoint + '/result/' + JSON.parse(query_post_result)["uuid"])
-        req.send()
-      }
+    });
+  }
+  closeConnection() {
+    if (
+      this.webSocket &&
+      (this.webSocket.readyState !== this.webSocket.CLOSED ||
+        this.webSocket.readyState !== this.webSocket.CLOSING)
+    ) {
+      this.webSocket.close();
     }
   }
-}
+  onMessage(event: MessageEvent) {
+    if (this.queries.has(event.data)) {
+      this.getQueryResult(event.data);
+    } else {
+      console.log(event);
+      console.log(event.data);
+    }
+  }
 
-function connect(endpoint: string) {
-    var sock = new WebSocket("ws://" + endpoint + "/connect");
-    return sock
+  async getQueryResult(uuid: string) {
+    const response = await fetch(`${this.getHttpEndpoint()}/result/${uuid}`);
+    const query = this.queries.get(uuid);
+    query?.completeCallback({
+      query: query.query,
+      result: await response.json(),
+    });
+    this.queries.delete(uuid);
+  }
+
+  async postQuery(query: JoernQuery) {
+    const payload = {
+      query: query.query,
+    };
+    const url = `${this.getHttpEndpoint()}/query`;
+    console.log(`Sending post query to ${url}`);
+    const response = await fetch(url, {
+      body: JSON.stringify(payload),
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'omit',
+    });
+    const jsonData = await response.json();
+    if (jsonData.uuid) {
+      this.queries.set(jsonData.uuid, query);
+    }
+  }
+
+  async execute(query: JoernQuery) {
+    await this.checkWebSocket();
+    this.postQuery(query);
+  }
 }
