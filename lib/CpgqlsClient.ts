@@ -19,26 +19,34 @@ export default class CpgqlsClient {
 
   checkWebSocket(): Promise<any> {
     return new Promise<any>((resolve, reject) => {
-      if (this.webSocket === null) {
-        this.webSocket = new WebSocket(`${this.getWSEndpoint()}/connect`);
-        this.webSocket.addEventListener('message', evt => {
-          if (evt.data === 'connected') {
-            resolve(null);
-          } else {
-            this.onMessage(evt);
-          }
-        });
-        this.webSocket.addEventListener('error', (evt: Event) => {
-          console.error(evt);
-          reject(evt);
-        });
-      } else if (this.webSocket.readyState === this.webSocket.OPEN) {
-        resolve(null);
-      } else if (
-        this.webSocket.readyState === this.webSocket.CLOSED ||
-        this.webSocket.readyState === this.webSocket.CLOSING
-      ) {
-        reject('Connection Closed');
+      try {
+        if (this.webSocket === null) {
+          this.webSocket = new WebSocket(`${this.getWSEndpoint()}/connect`);
+          this.webSocket.addEventListener('message', evt => {
+            if (evt.data === 'connected') {
+              resolve(null);
+            } else {
+              this.onMessage(evt);
+            }
+          });
+          this.webSocket.addEventListener('error', (evt: Event) => {
+            console.error(evt);
+            reject(evt);
+          });
+          this.webSocket.addEventListener('close', (evt: Event) => {
+            reject(evt);
+          });
+        } else if (this.webSocket.readyState === this.webSocket.OPEN) {
+          resolve(null);
+        } else if (
+          this.webSocket.readyState === this.webSocket.CLOSED ||
+          this.webSocket.readyState === this.webSocket.CLOSING
+        ) {
+          this.webSocket = null;
+          reject('Connection Closed');
+        }
+      } catch (ex) {
+        reject(ex);
       }
     });
   }
@@ -92,7 +100,11 @@ export default class CpgqlsClient {
   }
 
   async execute(query: JoernQuery) {
-    await this.checkWebSocket();
-    this.postQuery(query);
+    try {
+      await this.checkWebSocket();
+      this.postQuery(query);
+    } catch (ex) {
+      query.completeCallback({ error: ex.message || ex.description || ex });
+    }
   }
 }

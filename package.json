@@ -1,27 +1,64 @@
 {
-  "name": "@tuxology/cpgqls-client",
-  "files": [
-    "dist"
+  "name": "@shiftleft/cpgqls-client",
+  "version": "0.0.1",
+  "author": {
+    "name": "Suchakra Sharma",
+    "url": "https://suchakra.in",
+    "email": "mail@suchakra.in"
+  },
+  "contributors": [
+    {
+      "name": "Suchakra Sharma",
+      "url": "https://suchakra.in",
+      "email": "mail@suchakra.in"
+    },
+    {
+      "name": "Chaitanya K",
+      "url": "https://kchaitanya.com",
+      "email": "74nyjqk+5pbxnaf+ueykomh@kchaitanya.com"
+    }
   ],
   "scripts": {
     "tsc": "tsc --init",
-    "build": "webpack"
+    "build": "webpack",
+    "serve": "webpack serve --config webpack.serve.config.js",
+    "postinstall": "yarn unplug bootstrap"
   },
-  "module": "dist/index.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ShiftLeftSecurity/cpgqls-client-js.git"
+  },
+  "files": [
+    "dist"
+  ],
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "main": "dist/index.js",
   "devDependencies": {
     "@babel/core": "^7.10.5",
     "@babel/plugin-transform-runtime": "^7.10.5",
     "@babel/preset-env": "^7.10.4",
     "@webpack-cli/package-utils": "1.0.1-alpha.4",
+    "@webpack-cli/serve": "1.0.1-alpha.5",
     "babel-loader": "^8.1.0",
+    "cross-spawn": "^7.0.3",
     "prettier": "^2.0.5",
     "ts-loader": "^8.0.1",
     "typescript": "^3.9.7",
     "webpack": "^5.0.0-beta.22",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "4.0.0-beta.8"
   },
   "dependencies": {
     "@babel/runtime": "^7.10.5",
     "core-js": "^3.6.5"
+  },
+  "directories": {
+    "example": "expamples",
+    "lib": "lib"
+  },
+  "dependenciesMeta": {
+    "bootstrap": {
+      "unplugged": true
+    }
   }
 }
