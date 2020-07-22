@@ -1,14 +1,6 @@
 const path = require('path');
-
-module.exports = {
+const commonConfig = {
   entry: './lib/index.ts',
-  output: {
-    filename: 'index.js',
-    path: path.resolve(__dirname, 'dist'),
-    ecmaVersion: 6,
-    libraryTarget: 'global',
-    library: 'CpgqlsClientLib',
-  },
   mode: 'production',
   module: {
     rules: [
@@ -22,3 +14,27 @@ module.exports = {
     extensions: ['.ts'],
   },
 };
+
+const globalVariableConfig = {
+  ...commonConfig,
+  output: {
+    filename: 'index.browser.js',
+    path: path.resolve(__dirname, 'dist'),
+    ecmaVersion: 6,
+    libraryTarget: 'global',
+    library: 'CpgqlsClientLib',
+  },
+};
+
+const commonJsExportConfig = {
+  ...commonConfig,
+  output: {
+    filename: 'index.js',
+    path: path.resolve(__dirname, 'dist'),
+    ecmaVersion: 6,
+    libraryTarget: 'commonjs',
+    library: 'CpgqlsClientLib',
+  },
+};
+
+module.exports = [globalVariableConfig, commonJsExportConfig];
