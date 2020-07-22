@@ -20,7 +20,7 @@ jobs:
       with:
         java-version: 1.8
     - name: NextGen Static Analysis
-      run: ${GITHUB_WORKSPACE}/sl analyze --app cpgqls-client-js --tag branch=${{ github.head_ref }} --js --cpg . -- --ts
+      run: ${GITHUB_WORKSPACE}/sl analyze --app cpgqls-client-js --tag branch=${{ github.head_ref }} --js --cpg .
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
         
