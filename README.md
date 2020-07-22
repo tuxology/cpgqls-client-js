@@ -5,9 +5,15 @@
 ## Build
 
 ```
+yarn install
 yarn build
 ```
 
-## Example Usage
+## Testing
 
-See `example` directory. Just run the `test.html` file after `yarn build`
+Start Chrome/Chromium with CORS disabled and open `test.html` in `examples` directory
+
+```
+chrome --disable-web-security --user-data-dir="/tmp"
+```
+

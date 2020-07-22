@@ -17,6 +17,7 @@ function __anonymous() {
         textArea.value,
         data => {
           results.push(data);
+          renderResults();
         },
       ),
     );
@@ -28,7 +29,7 @@ function __anonymous() {
     query.className = 'query';
     result.className = 'query';
     query.textContent = data.query;
-    result.textContent = data.result;
+    result.textContent = (data.result.out != "" ? data.result.out : "ERROR: " + data.result.err);
     wrapper.appendChild(query);
     wrapper.appendChild(result);
     return wrapper;
