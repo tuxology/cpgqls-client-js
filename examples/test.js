@@ -48,9 +48,7 @@ function __anonymous() {
     query.className = 'query';
     result.className = 'query';
     query.textContent = data.query;
-    result.textContent = data.result.err
-      ? `ERROR: ${data.result.err}`
-      : data.result.out;
+    result.textContent = (data.result.out != "" ? data.result.out :`ERROR: ${data.result.err}`);
     wrapper.appendChild(query);
     wrapper.appendChild(result);
     return wrapper;
