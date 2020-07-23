@@ -19,7 +19,7 @@
       - run: make resolve-git
       - run: make build-js
       - run: yarn config set npmAuthToken "${{secrets.GITHUB_TOKEN}}"
-      - run: yarn config set npmPublishRegistry "//npm.pkg.github.com/"
+      - run: yarn config set npmPublishRegistry "https://npm.pkg.github.com/"
       - run: yarn npm publish
 
     publish-npm:
