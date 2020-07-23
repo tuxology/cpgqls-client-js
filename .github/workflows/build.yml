@@ -18,6 +18,5 @@
           registry-url: https://npm.pkg.github.com/
       - run: make resolve-git
       - run: make build-js
+      - run: echo "//npm.pkg.github.com/:_authToken=${{secrets.GITHUB_TOKEN}}" > .npmrc
       - run: yarn npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
