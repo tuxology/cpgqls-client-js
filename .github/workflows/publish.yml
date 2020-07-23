@@ -1,0 +1,37 @@
+---
+  # This workflow integrates ShiftLeft NG SAST with GitHub
+  # Visit https://docs.shiftleft.io for help
+  name: Publish npm package
+  
+  on:
+    release:
+      types: [published]
+  
+  jobs:
+    publish-gpr:
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://npm.pkg.github.com/
+      - run: make resolve-git
+      - run: make build-js
+      - run: yarn config set npmAuthToken "${{secrets.GITHUB_TOKEN}}"
+      - run: yarn config set npmPublishRegistry "//npm.pkg.github.com/"
+      - run: yarn npm publish
+
+    publish-npm:
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org
+      - run: make resolve-git
+      - run: make build-js
+      - run: yarn config set npmAuthToken "${{secrets.NPM_AUTH_TOKEN}}"
+      - run: yarn config set npmPublishRegistry "//registry.npmjs.org"
+      - run: yarn npm publish
