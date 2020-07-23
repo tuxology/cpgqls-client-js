@@ -1,0 +1,24 @@
+---
+  # This workflow integrates ShiftLeft NG SAST with GitHub
+  # Visit https://docs.shiftleft.io for help
+  name: Publish npm package
+  
+  on:
+    release:
+      types: [published]
+  
+  jobs:
+    NextGen-Static-Analysis:
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://npm.pkg.github.com/
+      - run: npm ci
+      - run: make resolve-git
+      - run: make build-js
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
