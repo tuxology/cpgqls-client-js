@@ -7,7 +7,6 @@
     "email": "mail@suchakra.in"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/",
     "access": "public"
   },
   "contributors": [

@@ -20,7 +20,6 @@
       - run: make build-js
       - run: yarn config set npmAuthToken "${{secrets.GITHUB_TOKEN}}"
       - run: yarn config set npmPublishRegistry "//npm.pkg.github.com/"
-      - run: yarn npm whoami
       - run: yarn npm publish
 
     publish-npm:
@@ -35,5 +34,4 @@
       - run: make build-js
       - run: yarn config set npmPublishRegistry "https://registry.npmjs.org/"
       - run: yarn config set npmAuthToken "${{secrets.NPM_AUTH_TOKEN}}"
-      - run: yarn npm whoami
       - run: yarn npm publish
