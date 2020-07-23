@@ -32,6 +32,7 @@
           registry-url: https://registry.npmjs.org
       - run: make resolve-git
       - run: make build-js
+      - run: yarn config set npmAlwaysAuth true
       - run: yarn config set npmAuthToken "${{secrets.NPM_AUTH_TOKEN}}"
       - run: yarn config set npmPublishRegistry "//registry.npmjs.org"
       - run: yarn npm publish
