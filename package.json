@@ -6,6 +6,10 @@
     "url": "https://suchakra.in",
     "email": "mail@suchakra.in"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
+    "access": "public"
+  },
   "contributors": [
     {
       "name": "Suchakra Sharma",
